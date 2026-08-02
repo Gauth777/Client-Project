@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { id: 'process', label: 'Milling Process' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'certifications', label: 'Certifications' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
@@ -49,7 +50,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           : 'border-stone-100 bg-[#fffdf7]/95 py-3 backdrop-blur-lg'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <button
           type="button"
           id="header-logo"
@@ -62,11 +63,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
               isScrolled ? 'h-14 w-14' : 'h-16 w-16'
             }`}
           >
-            <img
-              src={logoImg}
-              alt="Mayil rice logo"
-              className="h-full w-full object-contain p-0.5"
-            />
+            <img src={logoImg} alt="Sri Kannika Parameswari rice logo" className="h-full w-full object-contain p-0.5" />
           </span>
           <span className="hidden min-w-0 sm:block">
             <span className="block truncate font-serif text-sm font-bold uppercase tracking-[0.04em] text-stone-900 md:text-base">
@@ -78,7 +75,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           </span>
         </button>
 
-        <nav id="desktop-nav" className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+        <nav id="desktop-nav" className="hidden items-center gap-0.5 lg:flex xl:gap-1" aria-label="Primary navigation">
           {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -87,7 +84,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 key={item.id}
                 id={`nav-btn-${item.id}`}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative whitespace-nowrap rounded-full px-3.5 py-2 text-[13px] font-semibold transition-colors xl:px-4 xl:text-sm ${
+                className={`relative whitespace-nowrap rounded-full px-2.5 py-2 text-[12px] font-semibold transition-colors xl:px-3.5 xl:text-[13px] ${
                   isActive
                     ? 'text-emerald-900'
                     : 'text-stone-600 hover:bg-stone-100 hover:text-emerald-900'
@@ -97,7 +94,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 {isActive && (
                   <motion.span
                     layoutId="active-nav-indicator"
-                    className="absolute inset-x-4 -bottom-[9px] h-0.5 rounded-full bg-amber-500"
+                    className="absolute inset-x-3 -bottom-[9px] h-0.5 rounded-full bg-amber-500"
                     transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                   />
                 )}
