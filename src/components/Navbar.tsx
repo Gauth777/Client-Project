@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import logoImg from '../assets/logo/mayil-logo.svg';
+import logoImg from '../assets/logo/logo.png';
 
 interface NavbarProps {
   activeTab: string;
