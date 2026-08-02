@@ -21,6 +21,7 @@ import { Product } from '../types';
 import FacilityCarousel from './FacilityCarousel';
 import HeroAgrarianScene from './HeroAgrarianScene';
 import MillingProcess from './MillingProcess';
+import TraditionalRiceWoman from './TraditionalRiceWoman';
 
 interface HomeSectionProps {
   onNavigate: (tabId: string) => void;
@@ -35,6 +36,29 @@ const FLOATING_LEAVES = [
   { left: '89%', top: '69%', delay: 1.5, size: 18 },
   { left: '5%', top: '86%', delay: 0.4, size: 13 },
   { left: '94%', top: '90%', delay: 1.2, size: 16 },
+];
+
+const HERO_STATS = [
+  {
+    value: '15+ Years',
+    label: 'Milling Legacy',
+    description: 'Established in 2011 in Kallakurichi',
+  },
+  {
+    value: '150 Tons',
+    label: 'Daily Processing',
+    description: 'Automated high-capacity continuous lines',
+  },
+  {
+    value: '250+ Farms',
+    label: 'Partner Sourcing',
+    description: 'Direct fair-trade Cauvery basin network',
+  },
+  {
+    value: '99.99%',
+    label: 'Purity Standard',
+    description: 'Bühler Sortex trichromatic laser sorters',
+  },
 ];
 
 const GOOGLE_REVIEWS = [
@@ -78,76 +102,113 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
         ))}
       </div>
 
-      <section
-        id="home-hero"
-        className="relative overflow-hidden border-b border-stone-200 bg-[linear-gradient(180deg,#f5faee_0%,#fffdf8_48%,#ffffff_100%)]"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,173,70,0.14),transparent_31%),radial-gradient(circle_at_top_right,rgba(239,185,55,0.13),transparent_26%)]" />
+      <div id="home-hero-composition" className="relative z-10">
+        <section
+          id="home-hero"
+          className="relative overflow-hidden border-b border-stone-200 bg-[linear-gradient(180deg,#f5faee_0%,#fffdf8_48%,#ffffff_100%)]"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,173,70,0.14),transparent_31%),radial-gradient(circle_at_top_right,rgba(239,185,55,0.13),transparent_26%)]" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
-          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-4 xl:gap-8">
-            <div className="max-w-3xl pt-2 lg:pt-5">
-              <motion.span
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45 }}
-                className="inline-flex rounded-full bg-emerald-900 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
-              >
-                Since 2011 • Kallakurichi
-              </motion.span>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.58, delay: 0.08 }}
-                className="mt-5 font-serif text-4xl font-light leading-[1.04] text-stone-900 sm:text-5xl lg:text-[5rem] xl:text-[5.4rem]"
-              >
-                From fertile fields,
-                <br />
-                <span className="font-normal italic text-amber-600">to every family table.</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.58, delay: 0.15 }}
-                className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 sm:text-base"
-              >
-                A colourful journey inspired by Tamil agricultural life — hardworking hands in the paddy field, carefully packed rice at the centre, and the warmth of a freshly cooked meal at home.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.58, delay: 0.22 }}
-                className="mt-8 flex flex-col gap-3 sm:flex-row"
-              >
-                <button
-                  id="hero-products-btn"
-                  type="button"
-                  onClick={() => onNavigate('products')}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-emerald-700 active:scale-95"
+          <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+            <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:gap-4 xl:gap-8">
+              <div className="max-w-3xl pt-2 lg:pt-5">
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
+                  className="inline-flex rounded-full bg-emerald-900 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
                 >
-                  Explore Products
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-                <button
-                  id="hero-contact-btn"
-                  type="button"
-                  onClick={() => onNavigate('contact')}
-                  className="inline-flex items-center justify-center rounded-full border border-amber-500 bg-white/80 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-amber-700 transition-all hover:bg-amber-50 active:scale-95"
-                >
-                  Contact Us
-                </button>
-              </motion.div>
-            </div>
+                  Since 2011 • Kallakurichi
+                </motion.span>
 
-            <div className="relative lg:pl-2 xl:pl-4">
-              <HeroAgrarianScene />
+                <motion.h1
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.08 }}
+                  className="mt-5 font-serif text-4xl font-light leading-[1.04] text-stone-900 sm:text-5xl lg:text-[4.7rem] xl:text-[5.2rem]"
+                >
+                  From fertile fields,
+                  <br />
+                  <span className="font-normal italic text-amber-600">to every family table.</span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.15 }}
+                  className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 sm:text-base"
+                >
+                  A colourful journey inspired by Tamil agricultural life — carefully selected rice, traditional values and the warmth of a freshly cooked meal at home.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.22 }}
+                  className="mt-8 flex flex-col gap-3 sm:flex-row"
+                >
+                  <button
+                    id="hero-products-btn"
+                    type="button"
+                    onClick={() => onNavigate('products')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-emerald-700 active:scale-95"
+                  >
+                    Explore Products
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <button
+                    id="hero-contact-btn"
+                    type="button"
+                    onClick={() => onNavigate('contact')}
+                    className="inline-flex items-center justify-center rounded-full border border-amber-500 bg-white/80 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-amber-700 transition-all hover:bg-amber-50 active:scale-95"
+                  >
+                    Contact Us
+                  </button>
+                </motion.div>
+              </div>
+
+              <div className="relative flex min-h-[500px] items-end justify-center lg:min-h-[580px] lg:justify-end">
+                <TraditionalRiceWoman />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section id="home-agrarian-landscape" className="relative w-full bg-[#f8f7f0]">
+          <div className="w-full">
+            <HeroAgrarianScene />
+          </div>
+
+          <div
+            id="home-mill-statistics"
+            aria-label="Rice mill statistics"
+            className="relative z-10 mx-auto -mt-3 grid max-w-[1500px] grid-cols-1 gap-4 px-4 pb-3 sm:grid-cols-2 sm:px-6 lg:-mt-6 lg:grid-cols-4 lg:gap-6 lg:px-8"
+          >
+            {HERO_STATS.map((stat, index) => (
+              <motion.article
+                key={stat.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="flex min-h-[210px] flex-col rounded-[18px] border border-[#e9e1d1] bg-white px-7 py-8 shadow-[0_10px_28px_rgba(58,49,31,0.07)] sm:min-h-[225px] sm:px-8 sm:py-9"
+              >
+                <div>
+                  <div className="font-serif text-[34px] font-bold leading-none tracking-[-0.02em] text-emerald-950 sm:text-[38px]">
+                    {stat.value}
+                  </div>
+                  <div className="mt-3 text-[13px] font-extrabold uppercase tracking-[0.04em] text-stone-950 sm:text-sm">
+                    {stat.label}
+                  </div>
+                </div>
+                <div className="mt-auto border-t border-[#eee8dc] pt-5 text-sm leading-7 text-[#b89b68]">
+                  {stat.description}
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+      </div>
 
       <section id="home-facility-carousel" className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 space-y-1.5 text-center">
