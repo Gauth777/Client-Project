@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import logoImg from '../assets/logo/mayil-logo.jpeg';
+import logoImg from '../assets/logo/mayil-logo.svg';
 
 interface NavbarProps {
   activeTab: string;
@@ -59,11 +59,15 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
           aria-label="Go to home page"
         >
           <span
-            className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-stone-200 transition-all duration-300 group-hover:scale-[1.03] ${
+            className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-transparent ring-1 ring-[#e6d6b4] transition-all duration-300 group-hover:scale-[1.03] ${
               isScrolled ? 'h-14 w-14' : 'h-16 w-16'
             }`}
           >
-            <img src={logoImg} alt="Sri Kannika Parameswari rice logo" className="h-full w-full object-contain p-0.5" />
+            <img
+              src={logoImg}
+              alt="Sri Kannika Parameswari rice logo"
+              className="h-[108%] w-[108%] max-w-none object-cover"
+            />
           </span>
           <span className="hidden min-w-0 sm:block">
             <span className="block truncate font-serif text-sm font-bold uppercase tracking-[0.04em] text-stone-900 md:text-base">
