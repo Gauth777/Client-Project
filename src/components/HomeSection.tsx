@@ -4,194 +4,383 @@
  */
 
 import React from 'react';
-import { ArrowRight, MapPin, Phone, Mail, Award, Star, ExternalLink, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight,
+  Award,
+  ChevronRight,
+  Cpu,
+  ExternalLink,
+  Leaf,
+  Sprout,
+  Star,
+  Users,
+} from 'lucide-react';
 import { motion } from 'motion/react';
 import { APP_INFO } from '../data';
-import logoImg from '../assets/logo/mayil-logo.jpeg';
-import paddyFieldPhoto from '../assets/Just dial/paddy.png';
+import { Product } from '../types';
+import FacilityCarousel from './FacilityCarousel';
+import HeroAgrarianScene from './HeroAgrarianScene';
+import MillingProcess from './MillingProcess';
+import TraditionalRiceWoman from './TraditionalRiceWoman';
 
 interface HomeSectionProps {
   onNavigate: (tabId: string) => void;
-  onSelectProduct: (product: any) => void;
+  onSelectProduct: (product: Product) => void;
   openDealerModal: () => void;
 }
 
-export default function HomeSection({ onNavigate, openDealerModal }: HomeSectionProps) {
+const FLOATING_LEAVES = [
+  { left: '4%', top: '34%', delay: 0.2, size: 17 },
+  { left: '92%', top: '38%', delay: 1.1, size: 14 },
+  { left: '7%', top: '62%', delay: 0.7, size: 15 },
+  { left: '89%', top: '69%', delay: 1.5, size: 18 },
+  { left: '5%', top: '86%', delay: 0.4, size: 13 },
+  { left: '94%', top: '90%', delay: 1.2, size: 16 },
+];
+
+const HERO_STATS = [
+  {
+    value: '15+ Years',
+    label: 'Milling Legacy',
+    description: 'Established in 2011 in Kallakurichi',
+  },
+  {
+    value: '150 Tons',
+    label: 'Daily Processing',
+    description: 'Automated high-capacity continuous lines',
+  },
+  {
+    value: '250+ Farms',
+    label: 'Partner Sourcing',
+    description: 'Direct fair-trade Cauvery basin network',
+  },
+  {
+    value: '99.99%',
+    label: 'Purity Standard',
+    description: 'Bühler Sortex trichromatic laser sorters',
+  },
+];
+
+const GOOGLE_REVIEWS = [
+  {
+    name: 'Venugopal Raghavan',
+    text: 'Best quality in the market and on-time delivery.',
+  },
+  {
+    name: 'Saran Raj',
+    text: 'Quality is very good — a trustworthy mill.',
+  },
+  {
+    name: 'Vijay Kumar',
+    text: 'Good product and response.',
+  },
+  {
+    name: 'Latha',
+    text: 'Good quality rice and best service.',
+  },
+];
+
+export default function HomeSection({ onNavigate }: HomeSectionProps) {
   return (
-    <div id="home-section-container" className="space-y-16 pb-16 font-sans">
-      {/* 1. Hero Section */}
-      <section
-        id="home-hero"
-        className="relative bg-gradient-to-b from-stone-100 via-stone-50 to-white py-12 sm:py-20 border-b border-stone-200 overflow-hidden"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Hero Narrative */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              {/* Mayil Logo Hero Badge */}
-              <div className="inline-flex items-center space-x-3 bg-white p-2.5 sm:p-3 rounded-2xl border border-stone-200 shadow-md">
-                <div className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] bg-white rounded-xl border border-stone-100 overflow-hidden flex items-center justify-center shrink-0">
-                  <img
-                    src={logoImg}
-                    alt="Mayil Brand Logo - Sri Kannika Parameswari Rice Mill"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="text-left pr-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-800 block">
-                    Mayil Brand Rice
-                  </span>
-                  <span className="font-serif font-bold text-stone-900 text-sm sm:text-base block">
-                    Sri Kannika Parameswari
-                  </span>
-                  <span className="text-[11px] text-stone-500 block">
-                    Modern Rice Mill • Est. 2011
-                  </span>
-                </div>
+    <div id="home-section-container" className="relative space-y-20 overflow-hidden pb-16">
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        {FLOATING_LEAVES.map((leaf, index) => (
+          <motion.div
+            key={`floating-leaf-${index}`}
+            className="absolute z-0 text-emerald-800/[0.07]"
+            style={{ left: leaf.left, top: leaf.top }}
+            animate={{ y: [0, -9, 0], rotate: [0, 12, -8, 0] }}
+            transition={{
+              duration: 5.6 + index * 0.45,
+              repeat: Infinity,
+              delay: leaf.delay,
+              ease: 'easeInOut',
+            }}
+          >
+            <Leaf style={{ width: leaf.size, height: leaf.size }} />
+          </motion.div>
+        ))}
+      </div>
+
+      <div id="home-hero-composition" className="relative z-10">
+        <section
+          id="home-hero"
+          className="relative overflow-hidden border-b border-stone-200 bg-[linear-gradient(180deg,#f5faee_0%,#fffdf8_48%,#ffffff_100%)]"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,173,70,0.14),transparent_31%),radial-gradient(circle_at_top_right,rgba(239,185,55,0.13),transparent_26%)]" />
+
+          <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+            <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:gap-4 xl:gap-8">
+              <div className="max-w-3xl pt-2 lg:pt-5">
+                <motion.span
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
+                  className="inline-flex rounded-full bg-emerald-900 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
+                >
+                  Since 2011 • Kallakurichi
+                </motion.span>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.08 }}
+                  className="mt-5 font-serif text-4xl font-light leading-[1.04] text-stone-900 sm:text-5xl lg:text-[4.7rem] xl:text-[5.2rem]"
+                >
+                  From fertile fields,
+                  <br />
+                  <span className="font-normal italic text-amber-600">to every family table.</span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.15 }}
+                  className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 sm:text-base"
+                >
+                  A colourful journey inspired by Tamil agricultural life — carefully selected rice, traditional values and the warmth of a freshly cooked meal at home.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.58, delay: 0.22 }}
+                  className="mt-8 flex flex-col gap-3 sm:flex-row"
+                >
+                  <button
+                    id="hero-products-btn"
+                    type="button"
+                    onClick={() => onNavigate('products')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-emerald-700 active:scale-95"
+                  >
+                    Explore Products
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <button
+                    id="hero-contact-btn"
+                    type="button"
+                    onClick={() => onNavigate('contact')}
+                    className="inline-flex items-center justify-center rounded-full border border-amber-500 bg-white/80 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-amber-700 transition-all hover:bg-amber-50 active:scale-95"
+                  >
+                    Contact Us
+                  </button>
+                </motion.div>
               </div>
 
-              {/* Main Hero Headline */}
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl leading-tight text-stone-900 font-bold">
-                Pure Delta Grains,<br />
-                <span className="text-emerald-800 font-normal italic">Timeless Quality.</span>
-              </h1>
-
-              {/* Factual Introduction */}
-              <p className="text-stone-600 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed font-light mx-auto lg:mx-0">
-                Located in Kallakurichi, Tamil Nadu, Sri Kannika Parameswari Modern Rice Mill produces high-quality Ponni rice varieties processed through advanced optical color-sorting technology.
-              </p>
-
-              {/* Hero Call To Actions */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                <button
-                  id="hero-products-btn"
-                  onClick={() => onNavigate('products')}
-                  className="w-full sm:w-auto px-8 py-3.5 bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-200 active:scale-95 shadow-md flex items-center justify-center space-x-2"
-                >
-                  <span>View Our Products</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-                <button
-                  id="hero-quote-btn"
-                  onClick={() => onNavigate('quote')}
-                  className="w-full sm:w-auto px-8 py-3.5 border border-emerald-800 text-emerald-800 hover:bg-emerald-800/10 font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-200 active:scale-95 flex items-center justify-center"
-                >
-                  <span>Get a Quote</span>
-                </button>
+              <div className="relative flex min-h-[500px] items-end justify-center lg:min-h-[580px] lg:justify-end">
+                <TraditionalRiceWoman />
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Right Hero Image Card */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200 aspect-[4/3] bg-stone-100 group">
-                <img
-                  src={paddyFieldPhoto}
-                  alt="Sourced paddy fields"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex items-end p-6">
-                  <div className="text-white space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block">
-                      Quality Sourced
-                    </span>
-                    <h3 className="font-serif text-lg sm:text-xl font-bold">Cauvery Basin Heritage</h3>
-                    <p className="text-stone-300 text-xs leading-relaxed">
-                      Sourced from regional Tamil Nadu paddy fields and milled with strict quality standards.
-                    </p>
+        <section id="home-agrarian-landscape" className="relative w-full bg-[#f8f7f0]">
+          <div className="w-full">
+            <HeroAgrarianScene />
+          </div>
+
+          <div
+            id="home-mill-statistics"
+            aria-label="Rice mill statistics"
+            className="relative z-10 mx-auto -mt-3 grid max-w-[1500px] grid-cols-1 gap-4 px-4 pb-3 sm:grid-cols-2 sm:px-6 lg:-mt-6 lg:grid-cols-4 lg:gap-6 lg:px-8"
+          >
+            {HERO_STATS.map((stat, index) => (
+              <motion.article
+                key={stat.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="flex min-h-[210px] flex-col rounded-[18px] border border-[#e9e1d1] bg-white px-7 py-8 shadow-[0_10px_28px_rgba(58,49,31,0.07)] sm:min-h-[225px] sm:px-8 sm:py-9"
+              >
+                <div>
+                  <div className="font-serif text-[34px] font-bold leading-none tracking-[-0.02em] text-emerald-950 sm:text-[38px]">
+                    {stat.value}
+                  </div>
+                  <div className="mt-3 text-[13px] font-extrabold uppercase tracking-[0.04em] text-stone-950 sm:text-sm">
+                    {stat.label}
                   </div>
                 </div>
-              </div>
-            </div>
-
+                <div className="mt-auto border-t border-[#eee8dc] pt-5 text-sm leading-7 text-[#b89b68]">
+                  {stat.description}
+                </div>
+              </motion.article>
+            ))}
           </div>
+        </section>
+      </div>
+
+      <section id="home-facility-carousel" className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 space-y-1.5 text-center">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Where It All Happens</span>
+          <h2 className="font-serif text-2xl font-bold text-stone-900 sm:text-3xl">Inside Our Facility</h2>
         </div>
+        <FacilityCarousel />
       </section>
 
-      {/* 2. Concise Company Introduction Section */}
-      <section id="home-intro" className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-white p-8 sm:p-12 rounded-2xl border border-stone-200 shadow-sm space-y-6 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row items-center justify-between border-b border-stone-100 pb-6 gap-4">
-            <div>
-              <span className="text-xs text-emerald-800 font-bold uppercase tracking-wider block">
-                About S.K.P. Modern Rice Mill
+      <section id="home-intro-about" className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+        <div className="space-y-6 lg:col-span-5">
+          <div className="space-y-2">
+            <span className="flex items-center text-xs font-bold uppercase tracking-wider text-emerald-800">
+              <Sprout className="mr-1.5 h-4 w-4" />
+              Sustaining years of trust
+            </span>
+            <h2 className="font-serif text-2xl font-bold leading-tight text-stone-900 sm:text-3xl md:text-4xl">
+              Honouring Tamil agricultural wisdom
+            </h2>
+          </div>
+          <p className="text-sm leading-relaxed text-stone-600">
+            Sri Kannika Parameswari Modern Rice Mill brings together local agricultural knowledge and disciplined processing to deliver consistent rice for homes, retailers and commercial kitchens.
+          </p>
+          <p className="text-sm leading-relaxed text-stone-600">
+            From paddy selection and cleaning to sorting and packaging, each stage is handled with attention to grain quality, hygiene and reliable supply.
+          </p>
+          <button
+            id="home-about-learn-more"
+            type="button"
+            onClick={() => onNavigate('about')}
+            className="inline-flex items-center gap-1 rounded-lg bg-emerald-50 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-emerald-800 transition-colors hover:bg-emerald-100 hover:text-emerald-700"
+          >
+            Our Mill Story
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 lg:col-span-7">
+          <div className="space-y-4">
+            <div className="aspect-[4/5] overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-md">
+              <img
+                src="https://images.unsplash.com/photo-1557703913-d2b0cbf82722?q=80&w=900&auto=format&fit=crop"
+                alt="Rice harvest"
+                referrerPolicy="no-referrer"
+                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+            <div className="space-y-2 rounded-xl bg-emerald-900 p-6 text-emerald-100">
+              <span className="block font-serif text-lg font-bold text-white">Regional Paddy Selection</span>
+              <span className="block text-[11px] leading-relaxed text-emerald-300">
+                Paddy is selected with close attention to variety, condition and suitability for consistent milling.
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mt-1">
-                Delivering Excellence in Every Grain
-              </h2>
             </div>
-            <button
-              id="home-learn-about-btn"
-              onClick={() => onNavigate('about')}
-              className="px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-lg transition-colors shrink-0"
-            >
-              Learn More About Us
-            </button>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-stone-600 text-sm leading-relaxed">
-            <p>
-              Sri Kannika Parameswari Modern Rice Mill was established in 2011 with a commitment to providing clean, uniform, and delicious rice for South Indian households and commercial kitchens. Our facility in Kallakurichi combines traditional agricultural expertise with automated cleaning systems.
-            </p>
-            <p>
-              From pre-cleaning and de-stoning to optical color sorting and food-grade packaging, every stage is designed to deliver stone-free, spotless grains. We offer reliable supply for families, wholesalers, and food service partners.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 text-center border-t border-stone-100">
-            <div className="p-3 bg-stone-50 rounded-xl">
-              <span className="font-serif text-xl font-bold text-emerald-800 block">2011</span>
-              <span className="text-[10px] text-stone-500 font-semibold uppercase">Established Year</span>
+          <div className="space-y-4 pt-8">
+            <div className="space-y-2 rounded-xl bg-amber-600 p-6 text-amber-50">
+              <span className="block font-serif text-lg font-bold text-white">Modern Grain Sorting</span>
+              <span className="block text-[11px] leading-relaxed text-amber-100">
+                Optical sorting supports cleaner, more uniform grains across finished batches.
+              </span>
             </div>
-            <div className="p-3 bg-stone-50 rounded-xl">
-              <span className="font-serif text-xl font-bold text-emerald-800 block">Sortex</span>
-              <span className="text-[10px] text-stone-500 font-semibold uppercase">Optical Sorting</span>
-            </div>
-            <div className="p-3 bg-stone-50 rounded-xl">
-              <span className="font-serif text-xl font-bold text-emerald-800 block">100%</span>
-              <span className="text-[10px] text-stone-500 font-semibold uppercase">Stone-Free Guarantee</span>
-            </div>
-            <div className="p-3 bg-stone-50 rounded-xl">
-              <span className="font-serif text-xl font-bold text-emerald-800 block">4 Brands</span>
-              <span className="text-[10px] text-stone-500 font-semibold uppercase">Rice Varieties</span>
+            <div className="aspect-[4/5] overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-md">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1664117187648-5c84f3ea6b03?w=900&auto=format&fit=crop&q=80"
+                alt="Paddy field"
+                referrerPolicy="no-referrer"
+                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Customer Google Reviews CTA Section */}
-      <section id="home-google-reviews" className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="bg-emerald-950 text-white p-8 sm:p-10 rounded-2xl border border-emerald-900 shadow-xl text-center space-y-6 relative overflow-hidden">
-          <div className="space-y-3 relative z-10">
-            {/* Google-style review iconography */}
-            <div className="flex items-center justify-center space-x-1.5 text-amber-400">
-              <Star className="w-6 h-6 fill-amber-400" />
-              <Star className="w-6 h-6 fill-amber-400" />
-              <Star className="w-6 h-6 fill-amber-400" />
-              <Star className="w-6 h-6 fill-amber-400" />
-              <Star className="w-6 h-6 fill-amber-400" />
+      <div className="relative z-10">
+        <MillingProcess onNavigate={onNavigate} />
+      </div>
+
+      <section id="home-operational-values" className="relative z-10 mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
+        <div className="space-y-1.5 text-center">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">Quality Assurance</span>
+          <h2 className="font-serif text-2xl font-bold text-stone-900 sm:text-3xl">Care at every stage</h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {[
+            {
+              icon: Cpu,
+              title: 'Optical Grain Sorting',
+              text: 'Modern sorting equipment helps separate visible grain defects and supports consistent finished batches.',
+            },
+            {
+              icon: Award,
+              title: 'Process Discipline',
+              text: 'Cleaning, milling and packaging stages are organised to support hygiene and reliable day-to-day production.',
+            },
+            {
+              icon: Users,
+              title: 'Customer Relationships',
+              text: 'The mill serves households, retailers and trade partners with an emphasis on dependable supply and service.',
+            },
+          ].map(({ icon: Icon, title, text }, index) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.1 }}
+              className="space-y-4 p-4 text-center"
+            >
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 shadow-sm">
+                <Icon className="h-6 w-6" />
+              </div>
+              <h3 className="font-serif text-lg font-bold text-stone-900">{title}</h3>
+              <p className="mx-auto max-w-xs text-xs leading-relaxed text-stone-600">{text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section id="home-google-reviews" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative overflow-hidden rounded-[28px] border border-emerald-900 bg-emerald-950 p-7 text-white shadow-xl sm:p-10">
+          <div className="absolute -right-14 -top-14 h-48 w-48 rounded-full border border-amber-300/15" />
+          <div className="relative z-10 text-center">
+            <div className="flex items-center justify-center gap-1.5 text-amber-400">
+              {[0, 1, 2, 3, 4].map((star) => (
+                <Star key={star} className="h-5 w-5 fill-amber-400 sm:h-6 sm:w-6" />
+              ))}
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold">Customer Feedback & Reviews</h3>
-            <p className="text-emerald-200/90 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-              We take pride in delivering consistent quality to our customers. Visit our official Google Business page to read genuine customer reviews, location directions, and feedback.
+            <span className="mt-4 block text-xs font-bold uppercase tracking-[0.2em] text-amber-400">Google Customer Reviews</span>
+            <h2 className="mt-2 font-serif text-2xl font-bold sm:text-3xl">What customers have shared</h2>
+            <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-emerald-200/90 sm:text-sm">
+              Select any review to open the mill’s Google Business listing and view the public feedback directly.
             </p>
           </div>
 
-          <div className="relative z-10 pt-2">
+          <div className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {GOOGLE_REVIEWS.map((review) => (
+              <a
+                key={review.name}
+                href={APP_INFO.mapsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-h-48 flex-col justify-between rounded-2xl border border-emerald-700/60 bg-white/[0.07] p-5 text-left transition-all hover:-translate-y-1 hover:border-amber-400/70 hover:bg-white/[0.11]"
+                aria-label={`Open ${review.name}'s review on Google`}
+              >
+                <div>
+                  <div className="flex gap-0.5 text-amber-400">
+                    {[0, 1, 2, 3, 4].map((star) => (
+                      <Star key={star} className="h-3.5 w-3.5 fill-amber-400" />
+                    ))}
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-emerald-50">“{review.text}”</p>
+                </div>
+                <div className="mt-5 flex items-end justify-between gap-3 border-t border-emerald-700/50 pt-4">
+                  <span className="text-xs font-bold text-white">{review.name}</span>
+                  <ExternalLink className="h-4 w-4 text-emerald-300 transition-colors group-hover:text-amber-300" />
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="relative z-10 mt-8 text-center">
             <a
               id="view-google-reviews-btn"
               href={APP_INFO.mapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-full transition-all duration-200 shadow-lg active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-stone-950 shadow-lg transition-colors hover:bg-amber-400 active:scale-95"
             >
-              <span>View Reviews on Google</span>
-              <ExternalLink className="w-4 h-4" />
+              View All Reviews on Google
+              <ExternalLink className="h-4 w-4" />
             </a>
-          </div>
-
-          <div className="text-[10px] text-emerald-400 font-mono relative z-10">
-            <span>Verified Google Maps Location • Kallakurichi, Tamil Nadu</span>
           </div>
         </div>
       </section>
