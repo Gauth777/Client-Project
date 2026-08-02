@@ -28,12 +28,6 @@ interface HomeSectionProps {
   openDealerModal: () => void;
 }
 
-const HERO_CREDENTIALS = [
-  { value: '2011', label: 'Milling Legacy' },
-  { value: 'ISO 22000:2018', label: 'Food Safety Standard' },
-  { value: 'FSSAI', label: 'Food Safety Registration' },
-];
-
 const FLOATING_LEAVES = [
   { left: '4%', top: '34%', delay: 0.2, size: 17 },
   { left: '92%', top: '38%', delay: 1.1, size: 14 },
@@ -91,79 +85,67 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,173,70,0.14),transparent_31%),radial-gradient(circle_at_top_right,rgba(239,185,55,0.13),transparent_26%)]" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
-          <div className="max-w-3xl">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex rounded-full bg-emerald-900 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
-            >
-              Since 2011 • Kallakurichi
-            </motion.span>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.58, delay: 0.08 }}
-              className="mt-5 font-serif text-4xl font-light leading-[1.04] text-stone-900 sm:text-5xl lg:text-6xl"
-            >
-              From fertile fields,
-              <br />
-              <span className="font-normal italic text-amber-600">to every family table.</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.58, delay: 0.15 }}
-              className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 sm:text-base"
-            >
-              A colourful journey inspired by Tamil agricultural life — hardworking hands in the paddy field, carefully packed rice at the centre, and the warmth of a freshly cooked meal at home.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.58, delay: 0.22 }}
-              className="mt-8 flex flex-col gap-3 sm:flex-row"
-            >
-              <button
-                id="hero-products-btn"
-                type="button"
-                onClick={() => onNavigate('products')}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-emerald-700 active:scale-95"
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-4 xl:gap-8">
+            <div className="max-w-3xl pt-2 lg:pt-5">
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+                className="inline-flex rounded-full bg-emerald-900 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
               >
-                Explore Products
-                <ArrowRight className="h-4 w-4" />
-              </button>
-              <button
-                id="hero-contact-btn"
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="inline-flex items-center justify-center rounded-full border border-amber-500 bg-white/80 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-amber-700 transition-all hover:bg-amber-50 active:scale-95"
+                Since 2011 • Kallakurichi
+              </motion.span>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.58, delay: 0.08 }}
+                className="mt-5 font-serif text-4xl font-light leading-[1.04] text-stone-900 sm:text-5xl lg:text-[5rem] xl:text-[5.4rem]"
               >
-                Contact Us
-              </button>
-            </motion.div>
-          </div>
+                From fertile fields,
+                <br />
+                <span className="font-normal italic text-amber-600">to every family table.</span>
+              </motion.h1>
 
-          <div className="mt-10 lg:mt-12">
-            <HeroAgrarianScene />
-          </div>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.58, delay: 0.15 }}
+                className="mt-5 max-w-2xl text-sm leading-7 text-stone-600 sm:text-base"
+              >
+                A colourful journey inspired by Tamil agricultural life — hardworking hands in the paddy field, carefully packed rice at the centre, and the warmth of a freshly cooked meal at home.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="mx-auto mt-8 grid max-w-4xl grid-cols-1 divide-y divide-stone-200 border-y border-stone-200 bg-white/65 sm:grid-cols-3 sm:divide-x sm:divide-y-0"
-          >
-            {HERO_CREDENTIALS.map((item) => (
-              <div key={item.value} className="px-5 py-5 text-center">
-                <div className="font-serif text-xl font-bold text-emerald-950 sm:text-2xl">{item.value}</div>
-                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.15em] text-amber-700">{item.label}</div>
-              </div>
-            ))}
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.58, delay: 0.22 }}
+                className="mt-8 flex flex-col gap-3 sm:flex-row"
+              >
+                <button
+                  id="hero-products-btn"
+                  type="button"
+                  onClick={() => onNavigate('products')}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-emerald-700 active:scale-95"
+                >
+                  Explore Products
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+                <button
+                  id="hero-contact-btn"
+                  type="button"
+                  onClick={() => onNavigate('contact')}
+                  className="inline-flex items-center justify-center rounded-full border border-amber-500 bg-white/80 px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-amber-700 transition-all hover:bg-amber-50 active:scale-95"
+                >
+                  Contact Us
+                </button>
+              </motion.div>
+            </div>
+
+            <div className="relative lg:pl-2 xl:pl-4">
+              <HeroAgrarianScene />
+            </div>
+          </div>
         </div>
       </section>
 
