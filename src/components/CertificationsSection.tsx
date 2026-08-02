@@ -4,12 +4,11 @@
  */
 
 import React from 'react';
-import { Award, FileCheck, ShieldCheck, Scale, Microscope, ShieldCheck as VerifiedIcon, CheckCircle2, ChevronRight } from 'lucide-react';
+import { Award, FileCheck, ShieldCheck, Microscope, CheckCircle2, ShieldCheck as VerifiedIcon } from 'lucide-react';
 import { CERTIFICATIONS } from '../data';
 import authorizedPhoto from '../assets/Just dial/Authorized.png';
 
 export default function CertificationsSection() {
-  // Mapping mock icon strings to actual Lucide Icons
   const getIcon = (name: string) => {
     switch (name) {
       case 'Award':
@@ -26,23 +25,19 @@ export default function CertificationsSection() {
   const labAudits = [
     {
       title: 'Moisture Capacity Auditing',
-      tamil: 'ஈரப்பதம் அளவீட்டு சோதனை',
-      description: 'Moisture is measured using high-frequency digital capacitance analyzers. We strictly enforce a threshold of 12.0% to 13.5%. This specific dry range preserves natural aroma and eliminates any chance of warehouse fungal mold or weevil infestation, while maintaining a long 2-year shelf life.'
+      description: 'Moisture is measured using high-frequency digital meters. We strictly enforce an optimal dry threshold (12.0% to 13.5%). This specific range preserves natural aroma and eliminates fungal mold risk, maintaining a 12 to 24 month shelf life.'
     },
     {
-      title: 'Purity & Speck Photo-Analysis',
-      tamil: 'கலர் சார்ட்டர் தானியங்கி சோதனை',
-      description: 'Samples from each batch pass through computerized digital color-analyzers to verify optical quality. We guarantee less than 1.5% chalkiness and near-zero yellow tips. Any sample displaying dark specks or immature white grains is immediately flagged for milling recalibration.'
+      title: 'Purity & Optical Sorter Photo-Analysis',
+      description: 'Samples from each batch pass through computerized digital color sorters to verify optical quality. We enforce less than 1.5% chalkiness and near-zero yellow tips for pristine batch uniformity.'
     },
     {
       title: 'Batch Elongation & Thermal Cooking Test',
-      tamil: 'சமையல் சோதனை மற்றும் நீள அளவு',
-      description: 'Prior to bulk bagging, random rice samples are cooked in our laboratory kitchen. Technicians verify water-absorption coefficients and grain expansion. Our aged Ponni is guaranteed to expand to at least 2.5x its original volume without clumping or sticking.'
+      description: 'Prior to bulk bagging, random rice samples are cooked in our laboratory kitchen. Technicians verify water-absorption coefficients and grain expansion to guarantee fluffy, non-sticky cooking results.'
     },
     {
-      title: 'Chemical & Pesticide Heavy Screening',
-      tamil: 'பூச்சிக்கொல்லி மற்றும் இரசாயன வடிகட்டி',
-      description: 'Working with regional delta agronomists, we run rapid chemical screening on incoming paddy loads. We strictly enforce zero artificial bleaching, zero toxic polishing agents, and absolute compliance with national pesticide threshold values.'
+      title: 'Hygiene & Clean Handling Controls',
+      description: 'We strictly enforce zero artificial bleaching, zero toxic polishing agents, and complete hands-free hygienic packaging across every batch.'
     }
   ];
 
@@ -53,7 +48,7 @@ export default function CertificationsSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
           <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">Quality Assurance & Compliance</span>
           <h1 className="font-serif text-3xl sm:text-4xl font-bold">Standard Certifications</h1>
-          <p className="text-emerald-300/80 text-sm max-w-xl mx-auto">தரச் சான்றிதழ்கள் மற்றும் அங்கீகாரங்கள்</p>
+          <p className="text-emerald-300/80 text-sm max-w-xl mx-auto">Adhering to food safety, hygiene, and government quality guidelines.</p>
         </div>
       </section>
 
@@ -67,18 +62,18 @@ export default function CertificationsSection() {
               className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-4">
-                <div className="w-16 h-16 bg-emerald-50 rounded-xl flex items-center justify-center shadow-sm">
+                <div className="w-16 h-16 bg-emerald-50 rounded-xl flex items-center justify-center shadow-sm border border-emerald-100">
                   {getIcon(cert.iconName)}
                 </div>
                 <div className="space-y-1">
                   <h3 className="font-serif font-bold text-lg text-stone-900">{cert.title}</h3>
                   <p className="text-[10px] text-stone-400 font-semibold uppercase">{cert.authority}</p>
                 </div>
-                <p className="text-stone-600 text-xs leading-relaxed border-t border-stone-100 pt-3">
+                <p className="text-stone-600 text-xs leading-relaxed border-t border-stone-100 pt-3 font-sans">
                   {cert.description}
                 </p>
               </div>
-              <div className="text-[11px] font-mono font-bold text-emerald-800 bg-emerald-50/50 py-1.5 px-3 rounded-lg w-fit mt-4">
+              <div className="text-[11px] font-mono font-bold text-emerald-800 bg-emerald-50/70 py-1.5 px-3 rounded-lg w-fit mt-4">
                 {cert.year}
               </div>
             </div>
@@ -100,37 +95,34 @@ export default function CertificationsSection() {
               <div className="absolute bottom-0 left-0 right-0 bg-stone-950/70 backdrop-blur-sm px-4 py-2.5">
                 <p className="text-white text-xs font-bold flex items-center">
                   <VerifiedIcon className="w-3.5 h-3.5 mr-1.5 text-emerald-400 shrink-0" />
-                  <span>Authorized On-Site Inspection — Kallakurichi Facility</span>
+                  <span>Kallakurichi Mill Facility</span>
                 </p>
               </div>
             </div>
             <div className="space-y-2">
               <span className="text-xs text-emerald-800 font-bold uppercase tracking-wider flex items-center">
                 <Microscope className="w-4 h-4 mr-1.5" />
-                <span>In-House Lab Auditing</span>
+                <span>Quality Auditing</span>
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 leading-tight">
                 Quality Checked Before Bagging
               </h2>
             </div>
-            <p className="text-stone-600 text-sm leading-relaxed">
-              At Sri Kannika Parameswari Modern Rice Mill, quality is not a post-milling afterthought. We run a fully equipped Quality Assurance Laboratory directly at our Kallakurichi facility. Sourced loads must clear rigorous chemical, physical, and sensory audits before they are allowed into the storage silos.
-            </p>
-            <p className="text-stone-600 text-sm leading-relaxed">
-              Our batch numbers are integrated with custom QR-codes on the bags, enabling our distributors, retailers, and end-consumers to trace their rice directly back to the date of processing and the delta cooperative block where the paddy was grown.
+            <p className="text-stone-600 text-sm leading-relaxed font-sans">
+              At Sri Kannika Parameswari Modern Rice Mill, quality control is integral to our operations. Incoming paddy batches undergo physical and moisture audits before entering storage silos.
             </p>
             <div className="bg-white p-4 rounded-xl border border-stone-200/60 space-y-2">
-              <p className="font-bold text-xs text-stone-900">Laboratory Guarantee Metrics</p>
-              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-stone-500">
+              <p className="font-bold text-xs text-stone-900">Standard Quality Metrics</p>
+              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-stone-600">
                 <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Moisture: &lt; 13.5%</span>
-                <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Broken Grain: &lt; 1.5%</span>
-                <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Chalky Kernels: &lt; 2.0%</span>
+                <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Broken Grain: &lt; 2.5%</span>
+                <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Sortex Purity: 99%+</span>
                 <span className="flex items-center"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mr-1.5" /> Stone Impurity: 0%</span>
               </div>
             </div>
           </div>
 
-          {/* Detailed Lab Audits */}
+          {/* Detailed Audits */}
           <div className="lg:col-span-7 space-y-5">
             {labAudits.map((audit, idx) => (
               <div key={idx} className="bg-white p-5 rounded-xl border border-stone-200 shadow-sm flex items-start space-x-4">
@@ -138,11 +130,8 @@ export default function CertificationsSection() {
                   {idx + 1}
                 </span>
                 <div className="space-y-1">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
-                    <h4 className="font-serif font-bold text-stone-900 text-sm">{audit.title}</h4>
-                    <span className="text-[10px] text-stone-400 font-medium">({audit.tamil})</span>
-                  </div>
-                  <p className="text-stone-600 text-xs leading-relaxed">
+                  <h4 className="font-serif font-bold text-stone-900 text-sm">{audit.title}</h4>
+                  <p className="text-stone-600 text-xs leading-relaxed font-sans">
                     {audit.description}
                   </p>
                 </div>

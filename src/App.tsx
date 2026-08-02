@@ -157,9 +157,6 @@ export default function App() {
                   <h3 className="font-serif font-bold text-xl text-stone-900 leading-tight">
                     Authorized Distributership Enquiry
                   </h3>
-                  <p className="text-xs text-stone-400 font-medium tracking-tight">
-                    ஸ்ரீ கன்னிகா பரமேஸ்வரி மாடர்ன் ரைஸ் மில்
-                  </p>
                 </div>
                 <button
                   id="dealer-modal-close"

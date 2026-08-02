@@ -83,7 +83,6 @@ const URGENCY_OPTIONS = ['Flexible', 'Within a month', 'This week', 'Urgent'];
 const BUDGET_OPTIONS = ['Not sure', 'Under ₹50,000', '₹50k - ₹5 lakh', '₹5 lakh+'];
 
 const STEP_TITLES = ['Who are you?', 'What do you need?', 'Delivery & budget', 'Review & submit'];
-const STEP_TAMIL = ['நீங்கள் யார்?', 'உங்களுக்கு என்ன தேவை?', 'விநியோகம் & பட்ஜெட்', 'மதிப்பாய்வு & சமர்ப்பிக்கவும்'];
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -330,7 +329,7 @@ export default function QuoteSection() {
           <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">Quotation & Enquiry</span>
           <h1 className="font-serif text-3xl sm:text-4xl font-bold">Request a Quotation</h1>
           <p className="text-emerald-300/80 text-sm max-w-xl mx-auto">
-            விலைப்பட்டியல் கோருக - நாங்கள் 24 மணி நேரத்தில் பதிலளிப்போம்
+            Fill out the form below to receive a custom quote within 24 hours.
           </p>
         </div>
       </section>
@@ -379,7 +378,7 @@ export default function QuoteSection() {
                     className="flex items-center justify-center space-x-2 border border-emerald-800 text-emerald-800 hover:bg-emerald-50 font-bold text-xs uppercase tracking-wider px-4 py-3.5 rounded-lg transition-colors active:scale-95"
                   >
                     <Mail className="w-4 h-4" />
-                    <span>Send via Email</span>
+                    <span>Email Us</span>
                   </a>
                   <a
                     id="success-cta-call"
@@ -406,7 +405,6 @@ export default function QuoteSection() {
 
                 <div className="mb-6">
                   <h2 className="font-serif font-bold text-xl sm:text-2xl text-stone-900">{STEP_TITLES[step]}</h2>
-                  <p className="text-xs text-stone-400 mt-1">{STEP_TAMIL[step]}</p>
                 </div>
 
                 {/* Step 0: Who are you */}

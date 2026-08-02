@@ -21,11 +21,11 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
   };
 
   const footerLinks = [
-    { label: 'Home Page', id: 'home' },
-    { label: 'About Our Mill', id: 'about' },
-    { label: 'Ponni Products', id: 'products' },
-    { label: 'Milling Process', id: 'process' },
-    { label: 'Facility Gallery', id: 'gallery' },
+    { label: 'Home', id: 'home' },
+    { label: 'About', id: 'about' },
+    { label: 'Our Products', id: 'products' },
+    { label: 'Cooking Instructions', id: 'process' },
+    { label: 'Quality Identification', id: 'gallery' },
     { label: 'Certifications', id: 'certifications' },
     { label: 'Get a Quote', id: 'quote' },
     { label: 'Dealer Portal', id: 'dealers' },
@@ -39,10 +39,10 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
           <div className="text-center md:text-left">
             <h3 className="font-serif text-xl sm:text-2xl text-white font-bold leading-tight">
-              Looking to become an Authorized Distributer?
+              Looking to become an Authorized Distributor?
             </h3>
             <p className="text-emerald-300/80 text-sm mt-1 max-w-xl">
-              We offer highly competitive dealer margins, reliable logistics support, and guaranteed batch-to-batch quality metrics.
+              We offer competitive dealer margins, reliable logistics support, and guaranteed quality metrics.
             </p>
           </div>
           <button
@@ -74,57 +74,57 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
             </div>
           </div>
           <p className="text-stone-400 text-sm leading-relaxed">
-            Nurtured by the rich waters of Cauvery and crafted with global-tier Bühler Sortex color-sorters, we deliver rice of unmatched pristine quality, purity, and heritage.
+            Crafted with state-of-the-art optical color sorters, we deliver rice of unmatched pristine quality, purity, and taste.
           </p>
           <div className="flex items-center space-x-2 text-[11px] text-amber-500 font-semibold bg-amber-950/30 border border-amber-900/40 py-1.5 px-3 rounded-lg w-fit">
             <Flame className="w-3.5 h-3.5" />
-            <span>Celebrating 15+ Years of Purity</span>
+            <span>Established 2011 • Kallakurichi</span>
           </div>
 
-          {/* Social Links - NOTE: handles are unverified placeholders, confirm real accounts before launch */}
+          {/* Social Links */}
           <div className="flex items-center space-x-2.5 pt-1.5">
             <a
-              href="https://facebook.com/srikannika.ricemill"
+              href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-stone-800 hover:bg-emerald-800 text-stone-400 hover:text-white rounded-lg flex items-center justify-center border border-stone-700/40 transition-all cursor-pointer"
-              aria-label="Follow us on Facebook"
+              aria-label="Facebook"
             >
               <Facebook className="w-4 h-4" />
             </a>
             <a
-              href="https://instagram.com/srikannika.ricemill"
+              href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-stone-800 hover:bg-emerald-800 text-stone-400 hover:text-white rounded-lg flex items-center justify-center border border-stone-700/40 transition-all cursor-pointer"
-              aria-label="Follow us on Instagram"
+              aria-label="Instagram"
             >
               <Instagram className="w-4 h-4" />
             </a>
             <a
-              href="https://linkedin.com/company/sri-kannika-parameswari-rice-mill"
+              href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-stone-800 hover:bg-emerald-800 text-stone-400 hover:text-white rounded-lg flex items-center justify-center border border-stone-700/40 transition-all cursor-pointer"
-              aria-label="Connect on LinkedIn"
+              aria-label="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
-              href="https://youtube.com/@srikannika.ricemill"
+              href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-stone-800 hover:bg-emerald-800 text-stone-400 hover:text-white rounded-lg flex items-center justify-center border border-stone-700/40 transition-all cursor-pointer"
-              aria-label="Subscribe on YouTube"
+              aria-label="YouTube"
             >
               <Youtube className="w-4 h-4" />
             </a>
             <a
-              href={`https://wa.me/919944360308?text=${encodeURIComponent('Hello Sri Kannika Parameswari Rice Mill, I am writing to you from your website social links.')}`}
+              href={`https://wa.me/919944360308?text=${encodeURIComponent('Hello Sri Kannika Parameswari Rice Mill, I am contacting you from your website.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-8 h-8 bg-stone-800 hover:bg-emerald-800 text-stone-400 hover:text-white rounded-lg flex items-center justify-center border border-stone-700/40 transition-all cursor-pointer"
-              aria-label="Contact on WhatsApp"
+              aria-label="WhatsApp"
             >
               <MessageSquare className="w-4 h-4" />
             </a>
@@ -194,7 +194,7 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
               <Clock className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
               <div className="text-stone-400">
                 <p className="font-medium text-stone-200">{APP_INFO.workingHours}</p>
-                <p className="text-xs text-stone-500 mt-1">Open 7 days a week to serve you better.</p>
+                <p className="text-xs text-stone-500 mt-1">Open 7 days a week.</p>
               </div>
             </div>
             <a
@@ -216,7 +216,7 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
           <div className="text-center sm:text-left space-y-1">
             <p>© {currentYear} Sri Kannika Parameswari Modern Rice Mill. All Rights Reserved.</p>
-            <p className="text-[10px] text-stone-600">GSTIN: {APP_INFO.gstNumber} | FSSAI Lic No: {APP_INFO.fssai}</p>
+            <p className="text-[10px] text-stone-600">GSTIN: {APP_INFO.gstNumber} | Food Safety Registration</p>
           </div>
           <div className="flex items-center justify-center space-x-4">
             <button
@@ -238,12 +238,6 @@ export default function Footer({ setActiveTab, openDealerModal }: FooterProps) {
             <span className="hover:text-stone-400 transition-colors cursor-pointer">Quality Policy</span>
             <span className="text-stone-700">|</span>
             <span className="hover:text-stone-400 transition-colors cursor-pointer">Terms & Conditions</span>
-            <span className="text-stone-700">|</span>
-            <div className="flex items-center space-x-1 text-[11px] text-stone-600">
-              <span>Made with</span>
-              <Heart className="w-3 h-3 text-emerald-700 fill-emerald-700" />
-              <span>for Tamil Agriculture</span>
-            </div>
           </div>
         </div>
       </div>

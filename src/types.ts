@@ -6,7 +6,7 @@
 export interface Product {
   id: string;
   name: string;
-  tamilName: string;
+  tamilName?: string;
   tagline: string;
   category: 'aged' | 'boiled' | 'steamed' | 'premium';
   description: string;
@@ -18,20 +18,9 @@ export interface Product {
     sortingAccuracy: string;
     shelfLife: string;
   };
-  packSizes: string[]; // e.g., ["5kg", "10kg", "25kg", "75kg"]
+  packSizes: string[];
   image: string;
   isPopular?: boolean;
-}
-
-export interface ProcessStep {
-  stepNumber: number;
-  title: string;
-  tamilTitle: string;
-  description: string;
-  techInvolved: string;
-  impact: string;
-  iconName: string; // Used to map to Lucide icons
-  image: string;
 }
 
 export interface Certification {
@@ -43,15 +32,6 @@ export interface Certification {
   description: string;
 }
 
-export interface GalleryItem {
-  id: string;
-  title: string;
-  tamilTitle: string;
-  category: 'mill' | 'fields' | 'heritage' | 'products';
-  imageUrl: string;
-  description: string;
-}
-
 export interface DealerEnquiryInput {
   businessName: string;
   contactPerson: string;
@@ -60,7 +40,7 @@ export interface DealerEnquiryInput {
   city: string;
   state: string;
   gstin?: string;
-  expectedVolume: string; // e.g., "5-10 Tons", "10-25 Tons", etc.
+  expectedVolume: string;
   preferredProducts: string[];
   message?: string;
 }

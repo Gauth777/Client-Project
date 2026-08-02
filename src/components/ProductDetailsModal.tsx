@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { X, CheckCircle, Package, ShieldCheck, Flame, Scale, Clock } from 'lucide-react';
+import { X, CheckCircle, Package, ShieldCheck, Flame, Scale } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Product } from '../types';
 
@@ -17,7 +17,6 @@ interface ProductDetailsModalProps {
 export default function ProductDetailsModal({ product, onClose, openDealerModal }: ProductDetailsModalProps) {
   if (!product) return null;
 
-  // Custom traditional cooking tips based on rice category
   const getCookingGuide = (category: string) => {
     switch (category) {
       case 'premium':
@@ -32,13 +31,13 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
           soak: '20 Minutes in warm water',
           ratio: '1 Cup Rice : 2.75 Cups Water',
           method: 'Add rice to boiling water in an open vessel. Boil until tender (approx. 18 minutes) and drain surplus starch, or cook for 4 whistles in a pressure cooker.',
-          tips: 'Excellent for making traditional South Indian Kanji (gruel) and lunch meals.'
+          tips: 'Excellent for traditional South Indian meals.'
         };
       case 'steamed':
         return {
           soak: '15 Minutes',
           ratio: '1 Cup Rice : 2.25 Cups Water',
-          method: 'Cook in an electrical rice cooker or pressure cooker (3 whistles). Because it is steam-preconditioned, it cooks rapidly without becoming mushy.',
+          method: 'Cook in an electric rice cooker or pressure cooker (3 whistles). Because it is steam-preconditioned, it cooks rapidly without becoming mushy.',
           tips: 'Perfect for commercial bulk preparation and holding hot in buffet casseroles.'
         };
       default:
@@ -83,16 +82,13 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
               </span>
               {product.isPopular && (
                 <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Bestseller
+                  Popular Brand
                 </span>
               )}
             </div>
             <h3 className="font-serif font-bold text-xl sm:text-2xl text-stone-900 leading-tight">
               {product.name}
             </h3>
-            <p className="text-xs text-stone-400 font-medium tracking-tight">
-              {product.tamilName}
-            </p>
           </div>
           <button
             id="product-modal-close"
@@ -109,16 +105,15 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left Col - Product Image & Packs */}
             <div className="space-y-6">
-              <div className="aspect-4/3 rounded-xl overflow-hidden bg-stone-100 border border-stone-200 relative group">
+              <div className="aspect-4/3 rounded-xl overflow-hidden bg-stone-50 border border-stone-200 p-4 flex items-center justify-center relative group">
                 <img
                   src={product.image}
                   alt={product.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-stone-900/85 text-white py-1 px-2.5 rounded-md text-[10px] font-semibold tracking-wider flex items-center space-x-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Ultra-Purity Checked</span>
+                  <span>Clean Sortex Purity</span>
                 </div>
               </div>
 
@@ -135,13 +130,10 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
                       className="bg-white border border-stone-300 text-stone-700 text-xs px-3 py-1.5 rounded-lg font-semibold flex items-center space-x-1"
                     >
                       <Scale className="w-3 h-3 text-stone-400" />
-                      <span>{size} Laminated Bag</span>
+                      <span>{size} Bag</span>
                     </span>
                   ))}
                 </div>
-                <p className="text-[10px] text-stone-500 italic mt-1 leading-relaxed">
-                  * Packed in food-grade airtight bags with moisture barriers to maintain peak aroma.
-                </p>
               </div>
             </div>
 
@@ -167,7 +159,7 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
 
               {/* Technical Specifications */}
               <div className="space-y-3">
-                <h4 className="text-xs font-semibold text-stone-400 uppercase tracking-wider">Technical specifications</h4>
+                <h4 className="text-xs font-semibold text-stone-400 uppercase tracking-wider">Specifications</h4>
                 <div className="grid grid-cols-2 gap-3.5 bg-stone-50/60 p-4 rounded-xl border border-stone-200/50 text-xs">
                   <div>
                     <span className="text-stone-400 block font-medium">Moisture Content</span>
@@ -185,10 +177,6 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
                     <span className="text-stone-400 block font-medium">Shelf Life</span>
                     <span className="font-semibold text-stone-800">{product.specs.shelfLife}</span>
                   </div>
-                  <div className="col-span-2 border-t border-stone-200/60 pt-2.5">
-                    <span className="text-stone-400 block font-medium">Purity Rating</span>
-                    <span className="font-semibold text-emerald-800">{product.specs.sortingAccuracy}</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -198,7 +186,7 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
           <div className="bg-emerald-950/5 border border-emerald-900/20 p-5 sm:p-6 rounded-xl space-y-3.5">
             <h4 className="text-sm font-serif font-bold text-emerald-900 flex items-center">
               <Flame className="w-4.5 h-4.5 text-amber-500 mr-2" />
-              <span>The Perfect Tanjore Cooking Guidelines</span>
+              <span>Cooking Guidelines</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs">
               <div className="space-y-1">
@@ -206,7 +194,7 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
                 <p className="text-stone-700 leading-relaxed">{guide.soak}</p>
               </div>
               <div className="space-y-1">
-                <span className="text-emerald-800 font-bold uppercase tracking-wider text-[10px] block">2. Grain-to-Water Ratio</span>
+                <span className="text-emerald-800 font-bold uppercase tracking-wider text-[10px] block">2. Water Ratio</span>
                 <p className="text-stone-700 leading-relaxed font-semibold">{guide.ratio}</p>
               </div>
               <div className="space-y-1">
@@ -224,7 +212,7 @@ export default function ProductDetailsModal({ product, onClose, openDealerModal 
         {/* Footer Actions */}
         <div className="sticky bottom-0 bg-stone-50 border-t border-stone-200/80 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
           <div className="text-left text-xs text-stone-500 max-w-sm">
-            <span>Interested in wholesale stock or custom white-label packaging? Let’s establish a dialogue.</span>
+            <span>Interested in wholesale stock or dealership options? Reach out to our team.</span>
           </div>
           <div className="flex space-x-3 w-full sm:w-auto shrink-0 justify-end">
             <button
