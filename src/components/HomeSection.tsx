@@ -311,9 +311,9 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
         </div>
       </section>
 
-      <div className='relative z-10'>
+      {/* <div className='relative z-10'>
         <MillingProcess onNavigate={onNavigate} />
-      </div>
+      </div> */}
 
       <section
         id='home-operational-values'

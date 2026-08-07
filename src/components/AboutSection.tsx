@@ -111,7 +111,7 @@ export default function AboutSection() {
             Our Core Strengths
           </span>
           <h2 className='font-serif text-2xl sm:text-3xl font-bold text-stone-900'>
-            Why to choose Kannika Parameshwari Rice Mill
+            Why Us?
           </h2>
         </div>
 

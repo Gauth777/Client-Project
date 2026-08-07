@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'products', label: 'Our Products' },
-  { id: 'process', label: 'Milling Process' },
+  { id: 'process', label: 'Cooking Process' },
   { id: 'gallery', label: 'Quality identification' },
   { id: 'certifications', label: 'Certifications' },
   { id: 'contact', label: 'Contact' },
