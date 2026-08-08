@@ -6,8 +6,9 @@
 import React, { useState } from 'react';
 import { Flame, Droplets, Clock, Utensils, Info, CheckCircle2, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import CookingStepAnimation from './CookingStepAnimation';
 
-type CookingMethod = 'pressure-cooker' | 'electric-cooker' | 'open-pot';
+export type CookingMethod = 'pressure-cooker' | 'electric-cooker' | 'open-pot';
 
 interface StageInfo {
   stepNumber: number;
@@ -23,7 +24,7 @@ const COOKING_STAGES: StageInfo[] = [
     generalDesc: 'Use a standard measuring cup for consistent water-to-rice ratios across every meal.',
     methodDesc: {
       'pressure-cooker': 'Measure 1 cup of aged rice for 2-3 standard servings.',
-      'electric-cooker': 'Measure using the cup provided with your electric cooker.',
+      'electric-cooker': 'Measure 1 cup of rice using the specific plastic cup provided with your cooker.',
       'open-pot': 'Measure 1 cup of rice into a deep, wide cooking pot.'
     }
   },
@@ -32,9 +33,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Rinse Gently 2–3 Times',
     generalDesc: 'Wash in cold water with a gentle swirling motion to remove surface starch without breaking the grains.',
     methodDesc: {
-      'pressure-cooker': 'Rinse until the water runs mostly clear. Drain completely.',
-      'electric-cooker': 'Rinse in a separate bowl to protect your cooker pot lining.',
-      'open-pot': 'Swirl gently and drain off starch water thoroughly.'
+      'pressure-cooker': 'Rinse in a bowl until the water runs mostly clear. Drain completely.',
+      'electric-cooker': 'Rinse in a separate bowl to protect your cooker\'s non-stick inner pot lining.',
+      'open-pot': 'Swirl gently in the pot and drain off the milky starch water thoroughly.'
     }
   },
   {
@@ -42,9 +43,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Soak When Required',
     generalDesc: 'Soaking allows water to penetrate the kernel, promoting uniform heat distribution and fluffier elongation.',
     methodDesc: {
-      'pressure-cooker': 'Soak aged Ponni for 15 to 20 minutes before closing lid.',
-      'electric-cooker': 'Soak for 20 to 30 minutes in the cooking water for optimal grain rise.',
-      'open-pot': 'Soak for 30 minutes for maximum grain separation.'
+      'pressure-cooker': 'Soak aged rice for 20 to 30 minutes before closing the lid.',
+      'electric-cooker': 'Soak for 20 to 30 minutes directly in the inner pot for optimal grain rise.',
+      'open-pot': 'Soak for 30 minutes in the pot to ensure maximum grain separation when boiling.'
     }
   },
   {
@@ -52,9 +53,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Add Water Proportionately',
     generalDesc: 'Water quantities vary based on variety, age, and cooking method.',
     methodDesc: {
-      'pressure-cooker': 'Use 1 : 2.0 or 1 : 2.25 water ratio (1 cup rice to 2–2.25 cups water).',
-      'electric-cooker': 'Use 1 : 2.25 to 2.5 water ratio or follow inner pot line markers.',
-      'open-pot': 'Use generous water (1 : 4 or 5 ratio) for boiling and draining off surplus.'
+      'pressure-cooker': 'Use a 1 : 2.5 or 1 : 3 water ratio (aged boiled rice requires more water).',
+      'electric-cooker': 'Use a 1 : 2.5 water ratio or fill up to the corresponding line marker in the inner pot.',
+      'open-pot': 'Use a generous amount of water (1 : 4 or 1 : 5 ratio) as the excess will be drained.'
     }
   },
   {
@@ -62,9 +63,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Cook Using Selected Method',
     generalDesc: 'Apply steady heat to transform grain starch into light, fluffy rice.',
     methodDesc: {
-      'pressure-cooker': 'Cook on medium flame for 3 whistles. Turn off flame and let pressure drop naturally.',
-      'electric-cooker': 'Switch to Cook mode. Allow machine to automatically trip to Warm mode.',
-      'open-pot': 'Boil rapidly on open flame for 12–15 minutes until grains are tender. Drain excess water.'
+      'pressure-cooker': 'Cook on a medium flame for 3 to 4 whistles. Turn off the flame.',
+      'electric-cooker': 'Press down the switch to \'Cook\' mode. Wait for the machine to automatically trip.',
+      'open-pot': 'Bring to a rolling boil on high heat, then simmer for 15-20 minutes until tender. Carefully drain the excess starchy water.'
     }
   },
   {
@@ -72,9 +73,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Rest Before Opening',
     generalDesc: 'Resting lets internal steam equalize, preventing grains from sticking or tearing.',
     methodDesc: {
-      'pressure-cooker': 'Rest for 10–12 minutes until steam releases fully.',
-      'electric-cooker': 'Leave on Warm mode for 10 minutes without lifting the lid.',
-      'open-pot': 'Cover drained pot tightly with lid and let rest off heat for 5 minutes.'
+      'pressure-cooker': 'Let it rest for 10–15 minutes until the pressure drops and releases naturally.',
+      'electric-cooker': 'Leave it on \'Warm\' mode for 10 minutes without lifting the lid to seal in the aroma.',
+      'open-pot': 'Cover the drained pot tightly with a lid and let it rest off the heat for 5 minutes.'
     }
   },
   {
@@ -82,9 +83,9 @@ const COOKING_STAGES: StageInfo[] = [
     title: 'Fluff and Serve',
     generalDesc: 'Use a soft fork or flat paddle to gently lift and separate the grains.',
     methodDesc: {
-      'pressure-cooker': 'Gently slice through rice with a wooden paddle from edges to center.',
-      'electric-cooker': 'Fluff gently to release trapped steam and enjoy piping hot.',
-      'open-pot': 'Fluff gently for spotless, distinct, pearled grains.'
+      'pressure-cooker': 'Gently slice through the rice with a wooden paddle from the edges to the center.',
+      'electric-cooker': 'Fluff gently using the provided dimpled rice spatula to release trapped steam.',
+      'open-pot': 'Fluff gently with a fork; the draining method yields perfectly distinct, pearled grains.'
     }
   }
 ];
@@ -93,23 +94,23 @@ const METHOD_DETAILS: Record<CookingMethod, { name: string; icon: string; ratio:
   'pressure-cooker': {
     name: 'Pressure Cooker',
     icon: 'Flame',
-    ratio: '1 Cup Rice : 2.0 to 2.25 Cups Water',
-    time: '3 Whistles (~12-15 mins)',
+    ratio: '1 Cup Rice : 2.5 to 3.0 Cups Water',
+    time: '3-4 Whistles (~15 mins)',
     tip: 'Adding 1/2 teaspoon of ghee or oil while closing the cooker prevents froth and keeps grains non-sticky.'
   },
   'electric-cooker': {
     name: 'Electric Rice Cooker',
     icon: 'Sparkles',
-    ratio: '1 Cup Rice : 2.25 to 2.5 Cups Water',
+    ratio: '1 Cup Rice : 2.5 Cups Water',
     time: 'Auto-Switch (~20 mins)',
-    tip: 'Allow the cooker to stay on Warm mode for 10 minutes after switching off to seal in aroma.'
+    tip: 'Always rinse rice in a separate bowl to preserve the non-stick coating of your inner cooking pot.'
   },
   'open-pot': {
-    name: 'Open Pot Boiling',
+    name: 'Open Pot (Boil & Drain)',
     icon: 'Utensils',
     ratio: 'Ample Water (1 : 4+)',
-    time: '12 - 15 mins boiling',
-    tip: 'Draining surplus water after boiling reduces overall starch for a lighter, diabetic-friendly meal.'
+    time: '15-20 mins boiling',
+    tip: 'Draining surplus water after boiling reduces overall starch content, making for a lighter, healthier meal.'
   }
 };
 
@@ -196,7 +197,7 @@ export default function ProcessSection() {
               <div
                 key={stage.stepNumber}
                 id={`cooking-stage-${stage.stepNumber}`}
-                className="bg-white p-5 sm:p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-5"
+                className="bg-white p-5 sm:p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-5"
               >
                 <div className="w-10 h-10 rounded-xl bg-emerald-800 text-white font-serif font-bold text-base flex items-center justify-center shrink-0 shadow-sm">
                   {stage.stepNumber}
@@ -214,6 +215,11 @@ export default function ProcessSection() {
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 mr-1.5 shrink-0" />
                     <span>{stage.methodDesc[selectedMethod]}</span>
                   </div>
+                </div>
+
+                {/* Dynamic Animation Block */}
+                <div className="w-full sm:w-auto flex justify-center sm:block pt-2 sm:pt-0 border-t border-stone-100 sm:border-0 mt-3 sm:mt-0">
+                  <CookingStepAnimation stepNumber={stage.stepNumber} method={selectedMethod} />
                 </div>
               </div>
             ))}
