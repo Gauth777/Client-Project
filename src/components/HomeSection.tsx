@@ -63,20 +63,28 @@ const HERO_STATS = [
 
 const GOOGLE_REVIEWS = [
   {
-    name: 'Venugopal Raghavan',
-    text: 'Best quality in the market and on-time delivery.',
+    name: 'Arun kumar S',
+    text: 'I have been purchasing Yellow Mango Rice regularly for the past few years, and I’m extremely happy with the quality. The rice tastes really good and is always fresh. Thank you for consistently maintaining such great quality.',
+    rating: 5,
+    link: 'https://www.google.com/maps/place/SRI+KANNIKA+PARAMESWARI+MODERN+RICE+MILL/@11.7106828,78.9588866,17z/data=!4m8!3m7!1s0x3bab66e58a86950f:0xf0b041334aecebc7!8m2!3d11.7106828!4d78.9588866!9m1!1b1!16s%2Fg%2F11b7q0hlmf?hl=en-IN&entry=ttu'
   },
   {
-    name: 'Saran Raj',
-    text: 'Quality is very good — a trustworthy mill.',
+    name: 'raja s',
+    text: 'Iam used yellow mango brand for 5 years very nice quality and length.my children\'s favourite verity rice.so this rice is best.',
+    rating: 5,
+    link: 'https://www.google.com/maps/place/SRI+KANNIKA+PARAMESWARI+MODERN+RICE+MILL/@11.7106828,78.9588866,17z/data=!4m8!3m7!1s0x3bab66e58a86950f:0xf0b041334aecebc7!8m2!3d11.7106828!4d78.9588866!9m1!1b1!16s%2Fg%2F11b7q0hlmf?hl=en-IN&entry=ttu'
   },
   {
-    name: 'Vijay Kumar',
-    text: 'Good product and response.',
+    name: 'DHATCHNAMOORTHY S',
+    text: 'Loved the taste and softness of Manjal Mambazham brand rice.',
+    rating: 5,
+    link: 'https://www.google.com/maps/place/SRI+KANNIKA+PARAMESWARI+MODERN+RICE+MILL/@11.7106828,78.9588866,17z/data=!4m8!3m7!1s0x3bab66e58a86950f:0xf0b041334aecebc7!8m2!3d11.7106828!4d78.9588866!9m1!1b1!16s%2Fg%2F11b7q0hlmf?hl=en-IN&entry=ttu'
   },
   {
-    name: 'Latha',
-    text: 'Good quality rice and best service.',
+    name: 'Jothilingam V',
+    text: 'Green Mango is good for daily meals.Prince brand is good for Idly and dosa. Both are excellent in quality.',
+    rating: 5,
+    link: 'https://www.google.com/maps/place/SRI+KANNIKA+PARAMESWARI+MODERN+RICE+MILL/@11.7106828,78.9588866,17z/data=!4m8!3m7!1s0x3bab66e58a86950f:0xf0b041334aecebc7!8m2!3d11.7106828!4d78.9588866!9m1!1b1!16s%2Fg%2F11b7q0hlmf?hl=en-IN&entry=ttu'
   },
 ]
 
@@ -375,15 +383,21 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
         <div className='relative overflow-hidden rounded-[28px] border border-emerald-900 bg-emerald-950 p-7 text-white shadow-xl sm:p-10'>
           <div className='absolute -right-14 -top-14 h-48 w-48 rounded-full border border-amber-300/15' />
           <div className='relative z-10 text-center'>
-            <div className='flex items-center justify-center gap-1.5 text-amber-400'>
-              {[0, 1, 2, 3, 4].map((star) => (
-                <Star
-                  key={star}
-                  className='h-5 w-5 fill-amber-400 sm:h-6 sm:w-6'
-                />
-              ))}
+            <div className='inline-flex items-center gap-3 rounded-full border border-amber-400/30 bg-emerald-900/70 px-5 py-2 backdrop-blur-sm shadow-md mb-2'>
+              <span className='font-sans text-xl sm:text-2xl font-extrabold text-amber-300 tracking-tight leading-none'>4.8</span>
+              <div className='flex items-center gap-1 text-amber-400'>
+                {[0, 1, 2, 3, 4].map((star) => (
+                  <Star
+                    key={star}
+                    className='h-4 w-4 fill-amber-400 sm:h-5 sm:w-5'
+                  />
+                ))}
+              </div>
+              <span className='border-l border-emerald-700/80 pl-3 text-[11px] font-bold uppercase tracking-wider text-emerald-200'>
+                Overall Rating
+              </span>
             </div>
-            <span className='mt-4 block text-xs font-bold uppercase tracking-[0.2em] text-amber-400'>
+            <span className='mt-2 block text-xs font-bold uppercase tracking-[0.2em] text-amber-400'>
               Google Customer Reviews
             </span>
             <h2 className='mt-2 font-serif text-2xl font-bold sm:text-3xl'>
@@ -399,7 +413,7 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
             {GOOGLE_REVIEWS.map((review) => (
               <a
                 key={review.name}
-                href={APP_INFO.mapsLink}
+                href={review.link}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='group flex min-h-48 flex-col justify-between rounded-2xl border border-emerald-700/60 bg-white/[0.07] p-5 text-left transition-all hover:-translate-y-1 hover:border-amber-400/70 hover:bg-white/[0.11]'
@@ -407,8 +421,8 @@ export default function HomeSection({ onNavigate }: HomeSectionProps) {
               >
                 <div>
                   <div className='flex gap-0.5 text-amber-400'>
-                    {[0, 1, 2, 3, 4].map((star) => (
-                      <Star key={star} className='h-3.5 w-3.5 fill-amber-400' />
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <Star key={i} className='h-3.5 w-3.5 fill-amber-400' />
                     ))}
                   </div>
                   <p className='mt-4 text-sm leading-6 text-emerald-50'>
