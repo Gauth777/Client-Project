@@ -5,43 +5,213 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
-interface RiceBagProps {
+type ProductVariant = 'goldfish' | 'royal' | 'mangoGold' | 'mangoGreen';
+
+interface ProductRiceBagProps {
   x: number;
   y: number;
   scale?: number;
-  body: string;
-  accent: string;
-  label: string;
-  sublabel: string;
+  variant: ProductVariant;
 }
 
-function RiceBag({ x, y, scale = 1, body, accent, label, sublabel }: RiceBagProps) {
+function ProductRiceBag({ x, y, scale = 1, variant }: ProductRiceBagProps) {
+  const themes = {
+    goldfish: {
+      top: '#f7c96a',
+      bottom: '#f3e4c8',
+      accent: '#d66b18',
+      panel: '#fff7e8',
+      ink: '#b91c1c',
+    },
+    royal: {
+      top: '#b8db35',
+      bottom: '#078a43',
+      accent: '#075e36',
+      panel: '#16853f',
+      ink: '#fff6c4',
+    },
+    mangoGold: {
+      top: '#f7bf31',
+      bottom: '#ed8d12',
+      accent: '#c75913',
+      panel: '#fff0a8',
+      ink: '#7f1d1d',
+    },
+    mangoGreen: {
+      top: '#7fda28',
+      bottom: '#088b3f',
+      accent: '#056533',
+      panel: '#f4f7bf',
+      ink: '#7f1d1d',
+    },
+  } as const;
+
+  const theme = themes[variant];
+  const bodyGradientId = `bag-body-${variant}`;
+  const sheenGradientId = `bag-sheen-${variant}`;
+  const shadowId = `bag-shadow-${variant}`;
+  const isMango = variant === 'mangoGold' || variant === 'mangoGreen';
+
   return (
     <g transform={`translate(${x} ${y}) scale(${scale})`}>
-      <ellipse cx="70" cy="211" rx="61" ry="10" fill="rgba(25,64,26,0.18)" />
+      <defs>
+        <linearGradient id={bodyGradientId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={theme.top} />
+          <stop offset="100%" stopColor={theme.bottom} />
+        </linearGradient>
+        <linearGradient id={sheenGradientId} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="50%" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+        <filter id={shadowId} x="-35%" y="-30%" width="170%" height="180%">
+          <feDropShadow dx="0" dy="12" stdDeviation="7" floodColor="#173e25" floodOpacity="0.28" />
+        </filter>
+      </defs>
+
+      <ellipse cx="63" cy="219" rx="58" ry="10" fill="#163f28" opacity="0.18" />
       <path
-        d="M18 18h104c10 0 17 7 17 17v150c0 13-8 22-20 22H21c-12 0-20-9-20-22V35c0-10 7-17 17-17Z"
-        fill={body}
+        d="M10 12Q63 4 116 12L121 30V190Q121 209 106 216H20Q5 209 5 190V30Z"
+        fill={`url(#${bodyGradientId})`}
+        stroke={theme.accent}
+        strokeWidth="2.4"
+        filter={`url(#${shadowId})`}
       />
-      <path d="M13 28c27 17 86 17 114 0" fill="none" stroke="rgba(255,255,255,0.48)" strokeWidth="6" strokeLinecap="round" />
-      <path d="M1 183c27-13 111-13 138 0v12c-9 8-17 12-20 12H21c-5 0-12-4-20-12Z" fill={accent} />
-      <circle cx="70" cy="76" r="32" fill="#fff8dc" opacity="0.96" />
-      <path d="M31 121c18-29 38-48 61-59 16 8 31 23 44 44-18-4-37-4-56 0-18 4-34 9-49 15Z" fill="rgba(255,255,255,0.18)" />
-      <rect x="23" y="43" width="94" height="34" rx="17" fill="#c92c25" />
-      <text x="70" y="65" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="12" fontWeight="700" fill="#fffdf6">
-        {label}
-      </text>
-      <text x="70" y="101" textAnchor="middle" fontFamily="Georgia, serif" fontSize="14" fill="#3f2a12">
-        {sublabel}
-      </text>
-      <text x="70" y="118" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="8" letterSpacing="1.2" fill="#3f2a12">
-        PREMIUM RICE
-      </text>
-      <path d="M29 150h82" stroke="rgba(255,255,255,0.34)" strokeWidth="4" strokeLinecap="round" />
-      <path d="M32 163h59" stroke="rgba(255,255,255,0.25)" strokeWidth="3" strokeLinecap="round" />
-      <text x="109" y="179" textAnchor="end" fontFamily="Arial, sans-serif" fontSize="9" fontWeight="700" fill="#fffaf0">
-        25 KG
-      </text>
+      <path d="M9 23Q63 13 117 23" fill="none" stroke="#fff8d8" strokeWidth="4" strokeLinecap="round" opacity="0.72" />
+      <path d="M7 31Q63 22 119 31" fill="none" stroke={theme.accent} strokeWidth="3" strokeLinecap="round" opacity="0.65" />
+      <path d="M11 193Q63 181 115 193V207Q107 216 98 216H28Q18 216 10 207Z" fill={theme.accent} opacity="0.92" />
+
+      {variant === 'goldfish' && (
+        <>
+          <rect x="16" y="42" width="94" height="42" rx="8" fill={theme.panel} stroke="#d4a86b" strokeWidth="1.5" />
+          <text x="63" y="61" textAnchor="middle" fontFamily="Georgia, serif" fontSize="15" fontWeight="800" fill="#d22c24">
+            தங்கமீன்
+          </text>
+          <text x="63" y="75" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="700" fill="#24428e">
+            PREMIUM SORTEX RICE
+          </text>
+
+          <ellipse cx="31" cy="104" rx="11" ry="20" fill="#1d5aaa" />
+          <text x="31" y="99" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">P</text>
+          <text x="31" y="108" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">V</text>
+          <text x="31" y="117" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">M</text>
+
+          <ellipse cx="95" cy="104" rx="11" ry="20" fill="#1d5aaa" />
+          <text x="95" y="99" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">P</text>
+          <text x="95" y="108" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">V</text>
+          <text x="95" y="117" textAnchor="middle" fontFamily="Georgia, serif" fontSize="7" fontWeight="700" fill="#fff">M</text>
+
+          <motion.g
+            animate={{ x: [0, 3, 0], rotate: [0, -2, 0, 2, 0] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ transformOrigin: '64px 115px' }}
+          >
+            <ellipse cx="63" cy="115" rx="23" ry="14" fill="#f29f16" />
+            <ellipse cx="56" cy="111" rx="13" ry="8" fill="#ffc83d" opacity="0.88" />
+            <path d="M84 115l20-15-4 15 4 15Z" fill="#ef7516" />
+            <path d="M59 102c8-12 18-12 25-7-8 1-13 5-17 11Z" fill="#f6b323" />
+            <path d="M60 128c8 11 18 11 25 5-8 0-13-4-17-9Z" fill="#ef7a18" />
+            <circle cx="49" cy="111" r="2.6" fill="#24180e" />
+            <circle cx="48.3" cy="110.2" r="0.8" fill="#fff" />
+          </motion.g>
+
+          <rect x="27" y="143" width="72" height="18" rx="9" fill="#ec238c" />
+          <text x="63" y="155" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="9" fontWeight="800" fill="#fff">SORTEX CLEANED</text>
+          <path d="M18 177c21-10 41-12 60-5 12 5 23 5 32 2v16H18Z" fill="#b97432" opacity="0.7" />
+          <path d="M17 182c18-7 32-7 44 0 12 7 30 8 49 2" fill="none" stroke="#f5e5bd" strokeWidth="4" strokeLinecap="round" />
+        </>
+      )}
+
+      {variant === 'royal' && (
+        <>
+          <path d="M21 42Q63 27 105 42V77Q63 66 21 77Z" fill="#17743b" stroke="#f0bd3b" strokeWidth="2" />
+          <text x="63" y="55" textAnchor="middle" fontFamily="Georgia, serif" fontSize="12" fontWeight="800" fill="#fff6d1">
+            மணிமகுடம்
+          </text>
+          <text x="63" y="67" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="5.6" fontWeight="700" fill="#ffe082">
+            CELEBRATION OF VICTORY
+          </text>
+
+          <motion.g
+            animate={{ y: [0, -2, 0], rotate: [0, 1.2, 0, -1.2, 0] }}
+            transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ transformOrigin: '63px 126px' }}
+          >
+            <path d="M41 112c6-21 14-32 22-32s17 11 23 32Z" fill="#c47d16" stroke="#f5cf55" strokeWidth="2" />
+            <path d="M44 101l7-15 7 9 6-18 7 18 7-9 5 15Z" fill="#e7ac2c" stroke="#8b4a0b" strokeWidth="1.5" />
+            <ellipse cx="63" cy="116" rx="17" ry="20" fill="#a8613b" />
+            <path d="M46 112c4-17 12-24 18-24 9 0 15 8 17 21-13-5-24-4-35 3Z" fill="#241816" />
+            <path d="M48 127c8 4 19 4 30 0-2 18-10 29-16 29-7 0-12-10-14-29Z" fill="#1f1818" />
+            <circle cx="57" cy="115" r="1.8" fill="#17100c" />
+            <circle cx="70" cy="115" r="1.8" fill="#17100c" />
+            <path d="M57 125c4 3 9 3 13 0" stroke="#6f352a" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+            <path d="M30 163c8-22 21-34 33-34 14 0 27 12 34 34Z" fill="#0f683c" stroke="#efc351" strokeWidth="2" />
+            <path d="M37 141h52" stroke="#f4c84c" strokeWidth="5" opacity="0.8" />
+            <path d="M30 99v74" stroke="#8d5b17" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="30" cy="94" r="8" fill="none" stroke="#c18720" strokeWidth="3" />
+            <path d="M95 98v76" stroke="#805719" strokeWidth="3" strokeLinecap="round" />
+            <path d="M95 98c10 4 16 10 20 20-7-3-13-3-20 0Z" fill="#117846" />
+          </motion.g>
+
+          <path d="M19 175h88v18H19Z" fill="#0a6b3d" opacity="0.72" />
+          <path d="M20 175l10-11 7 11 9-16 9 16 9-20 10 20 9-14 8 14 8-10 9 10" fill="none" stroke="#d9b44a" strokeWidth="2" />
+        </>
+      )}
+
+      {isMango && (
+        <>
+          <path d="M18 42Q63 24 108 42L100 76Q63 68 26 76Z" fill="#b92120" stroke="#fff3d0" strokeWidth="3" />
+          <text x="63" y="58" textAnchor="middle" fontFamily="Georgia, serif" fontSize="14" fontWeight="800" fill="#fffaf0">
+            மாம்பழம்
+          </text>
+          <text x="63" y="69" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="5.8" fontWeight="700" fill="#ffe3a6">
+            MAMBAZHAM
+          </text>
+
+          <path d="M29 102c15-27 31-41 49-49" fill="none" stroke="#6a3b1f" strokeWidth="5" strokeLinecap="round" />
+          <path d="M44 88c14-15 30-20 48-16" fill="none" stroke="#315c28" strokeWidth="4" strokeLinecap="round" />
+          {[46, 58, 72, 85, 96].map((cx, index) => (
+            <motion.ellipse
+              key={`${variant}-${cx}`}
+              cx={cx}
+              cy={index % 2 === 0 ? 82 : 72}
+              rx="4.2"
+              ry="6"
+              fill={variant === 'mangoGold' ? '#f4b62e' : '#dbd72c'}
+              animate={{ rotate: [-4, 5, -4] }}
+              transition={{ duration: 3.2 + index * 0.2, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ transformOrigin: `${cx}px ${index % 2 === 0 ? 82 : 72}px` }}
+            />
+          ))}
+
+          <ellipse cx="65" cy="106" rx="40" ry="23" fill={theme.panel} opacity="0.96" />
+          <text x="65" y="103" textAnchor="middle" fontFamily="Georgia, serif" fontSize="8" fill="#4c2d18">Rajabogam</text>
+          <text x="65" y="116" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="11" fontWeight="800" fill="#171717">Kichadi Ponni</text>
+
+          <path d="M18 139c22-13 45-15 69-4 11 5 19 6 25 4v36H18Z" fill={variant === 'mangoGold' ? '#d9831b' : '#199744'} opacity="0.82" />
+          <path d="M19 153c20-9 39-9 56-1 14 7 26 8 37 3" fill="none" stroke="#f5e6a7" strokeWidth="3" strokeLinecap="round" />
+          <path d="M77 152h20v17H77Z" fill="#f4e0a0" />
+          <path d="M75 152l12-10 12 10Z" fill="#8a4d1d" />
+          <path d="M25 169c8-14 16-20 25-20 8 0 14 5 19 13" fill="none" stroke="#f3d85e" strokeWidth="2.5" />
+          <motion.path
+            d="M42 166c4-7 8-7 12 0-4 5-8 5-12 0Z"
+            fill="#7d3fc5"
+            animate={{ scale: [1, 1.16, 1], rotate: [-5, 5, -5] }}
+            transition={{ duration: 2.7, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ transformOrigin: '48px 166px' }}
+          />
+        </>
+      )}
+
+      <rect x="79" y="185" width="30" height="18" rx="9" fill="#fff7dc" opacity="0.9" />
+      <text x="94" y="197" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" fontWeight="800" fill={theme.accent}>26 KG</text>
+
+      <motion.path
+        d="M18 37L37 35 80 194 60 198Z"
+        fill={`url(#${sheenGradientId})`}
+        animate={{ opacity: [0, 0.65, 0], x: [-18, 24, 52] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+      />
     </g>
   );
 }
@@ -106,7 +276,7 @@ export default function HeroAgrarianScene() {
       >
         <title id="agrarian-scene-title">Illustrated journey from paddy field to cooked rice</title>
         <desc id="agrarian-scene-description">
-          Workers tend a green paddy field on the left, artistic rice bags are arranged in the centre, and a traditionally dressed woman cooks rice on the right.
+          Workers tend a green paddy field on the left, four animated rice products are arranged in the centre, and a traditionally dressed woman cooks rice on the right.
         </desc>
 
         <defs>
@@ -173,14 +343,33 @@ export default function HeroAgrarianScene() {
           <Worker x={76} y={423} scale={0.88} sari="#267ca0" blouse="#8c3822" />
         </motion.g>
 
-        <motion.g animate={{ y: [0, -7, 0] }} transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut' }}>
-          <RiceBag x={454} y={292} scale={1.06} body="#ef9411" accent="#d87312" label="MAMBAZHAM" sublabel="Rajabogam" />
+        <motion.g
+          animate={{ y: [0, -8, 0], rotate: [-0.7, 0.7, -0.7] }}
+          transition={{ duration: 4.9, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ transformOrigin: '468px 410px' }}
+        >
+          <ProductRiceBag x={402} y={287} scale={0.9} variant="goldfish" />
         </motion.g>
-        <motion.g animate={{ y: [0, -10, 0] }} transition={{ duration: 4.8, repeat: Infinity, delay: 0.6, ease: 'easeInOut' }}>
-          <RiceBag x={573} y={268} scale={1.15} body="#18bd43" accent="#078b31" label="MAMBAZHAM" sublabel="Kichadi Ponni" />
+        <motion.g
+          animate={{ y: [0, -12, 0], rotate: [0.6, -0.7, 0.6] }}
+          transition={{ duration: 5.4, repeat: Infinity, delay: 0.35, ease: 'easeInOut' }}
+          style={{ transformOrigin: '579px 400px' }}
+        >
+          <ProductRiceBag x={518} y={258} scale={1.03} variant="royal" />
         </motion.g>
-        <motion.g animate={{ y: [0, -8, 0] }} transition={{ duration: 4.6, repeat: Infinity, delay: 0.3, ease: 'easeInOut' }}>
-          <RiceBag x={714} y={291} scale={1.05} body="#c8df36" accent="#98ad28" label="PREMIUM" sublabel="Ponni Rice" />
+        <motion.g
+          animate={{ y: [0, -9, 0], rotate: [-0.5, 0.6, -0.5] }}
+          transition={{ duration: 4.7, repeat: Infinity, delay: 0.7, ease: 'easeInOut' }}
+          style={{ transformOrigin: '700px 411px' }}
+        >
+          <ProductRiceBag x={640} y={278} scale={0.96} variant="mangoGold" />
+        </motion.g>
+        <motion.g
+          animate={{ y: [0, -10, 0], rotate: [0.5, -0.5, 0.5] }}
+          transition={{ duration: 5.1, repeat: Infinity, delay: 1.05, ease: 'easeInOut' }}
+          style={{ transformOrigin: '817px 414px' }}
+        >
+          <ProductRiceBag x={760} y={286} scale={0.91} variant="mangoGreen" />
         </motion.g>
 
         <g transform="translate(950 274)">
